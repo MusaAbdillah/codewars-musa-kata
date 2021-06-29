@@ -38,9 +38,23 @@ func Decode(roman string) int {
 		fmt.Println("both condition handle left I", (letter == "I" && strings.Contains("VXLCDM", nextLetter) || prevLetter == "I" && strings.Contains("VXLCDM", letter)))
 
 		if letter == "I" && strings.Contains("VXLCDM", nextLetter) || prevLetter == "I" && strings.Contains("VXLCDM", letter) {
-
+			x = leftRomanNumber(letter, x)
 			fmt.Println("--I'm inside if--")
-			switch letter {
+			
+		} else {
+			x = rightRomanNumber(letter, x)
+			fmt.Println("--I'm inside else--")
+			
+		}
+
+	}
+
+	fmt.Println("Final result ", x)
+	return x
+}
+
+func leftRomanNumber(letter string, x int) int {
+		switch letter {
 			case "I":
 				x += 1
 			case "V":
@@ -57,10 +71,12 @@ func Decode(roman string) int {
 				x = 1000 - x
 			default:
 				x += 0
-			}
-		} else {
-			fmt.Println("--I'm inside else--")
-			switch letter {
+		}
+	return x
+}
+
+func rightRomanNumber(letter string, x int) int {
+		switch letter {
 			case "I":
 				x += 1
 			case "V":
@@ -77,11 +93,7 @@ func Decode(roman string) int {
 				x += 1000
 			default:
 				x += 0
-			}
 		}
-
-	}
-
-	fmt.Println("Final result ", x)
 	return x
 }
+
